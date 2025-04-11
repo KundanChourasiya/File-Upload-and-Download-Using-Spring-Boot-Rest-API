@@ -77,7 +77,7 @@ public class FileServiceImpl implements FileService {
             String fileName = randomNum.concat(originalFilename.substring(originalFilename.lastIndexOf(".")));
 
             // set path where file is saved
-            String path = imagePath +fileName;
+            String path = pdfPath +fileName;
 
             fileData = FileData.builder()
                     .name(fileName)
