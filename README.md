@@ -83,8 +83,6 @@ user this data for checking purpose.
     </dependency>
 ```
 
-## Step to follow
-
 ## configure Mysql configuration and file storage path in applcation.properties file.
 ```
 spring.application.name=3.File-Upload-and-Download-Using-Spring-Boot-Rest-API
