@@ -71,10 +71,10 @@ user this data for checking purpose.
     </dependency>
 
     <dependency>
-         <groupId>com.mysql</groupId>
-			      <artifactId>mysql-connector-j</artifactId>
-			      <scope>runtime</scope>
-		  </dependency>
+	<groupId>com.mysql</groupId>
+	<artifactId>mysql-connector-j</artifactId>
+	<scope>runtime</scope>
+    </dependency>
     
     <dependency>
         <groupId>org.projectlombok</groupId>
@@ -398,7 +398,7 @@ Url - http://localhost:8080/file/pdf/download/0ee8b8d9-cf2a-486c-965a-ee79cbf071
 ![image](https://github.com/user-attachments/assets/5ebdc580-510d-49a7-9b46-0ce25272cf40)
 
 
-# File Storage Directory
+### File Storage Directory
 
 ![image](https://github.com/user-attachments/assets/9b91e216-d3cd-43a3-bf2e-e86ff8547343)
 
