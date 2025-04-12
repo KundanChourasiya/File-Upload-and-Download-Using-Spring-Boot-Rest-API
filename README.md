@@ -1,7 +1,7 @@
 # File-Upload-and-Download-Using-Spring-Boot-Rest-API
 
 > [!NOTE]
-> ### In this upload and download image/ pdf files from local directory.
+> ### In this Api we upload and download image/ pdf files from local directory.
 > 1. Postman for testing endpoint
 > 2. For Database we will use Mysql
 > 3. Good interet connection to build project faster
