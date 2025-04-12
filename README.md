@@ -3,7 +3,7 @@
 > [!NOTE]
 > ### In this upload and download image/ pdf files from local directory.
 > 1. Postman for testing endpoint
-> 2. For Database we will use PostgreSql
+> 2. For Database we will use Mysql
 > 3. Good interet connection to build project faster
 
 ## Tech Stack
