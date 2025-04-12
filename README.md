@@ -382,16 +382,24 @@ public class FileController {
 ### *PostMan Test Cases*
 
 Url - http://localhost:8080/file/upload
+
 ![image](https://github.com/user-attachments/assets/8f220429-6dfc-4ac5-9c55-cc1ba2da9a6f)
 
 Url - http://localhost:8080/file/image/download/ddbe6014-a3ae-4541-bc8f-d195256f423a.jpg{filename}
+
 ![image](https://github.com/user-attachments/assets/0cf14312-6144-42b7-9a6b-b53a798be1a2)
 
 Url - http://localhost:8080/file/upload
+
 ![image](https://github.com/user-attachments/assets/0260a6b9-55e8-473c-9e88-22e87afbdbb3)
 
 Url - http://localhost:8080/file/pdf/download/0ee8b8d9-cf2a-486c-965a-ee79cbf07183.pdf{filename}
+
 ![image](https://github.com/user-attachments/assets/5ebdc580-510d-49a7-9b46-0ce25272cf40)
 
+
+# File Storage Directory
+
+![image](https://github.com/user-attachments/assets/9b91e216-d3cd-43a3-bf2e-e86ff8547343)
 
 
