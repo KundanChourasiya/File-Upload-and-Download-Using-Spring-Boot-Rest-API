@@ -326,7 +326,7 @@ public class FileController {
     public ResponseEntity<ApiResponse<?>> uploadFile(@RequestParam ("file") MultipartFile file) throws IOException {
         if (file.isEmpty()){
             ApiResponse<Object> response = new ApiResponse<>(false, "Request must contain file", null);
-            return ResponseEntity.status(HttpStatus.OK.value()).body(response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
         }
         FileData fileData = service.uploadFile(file);
         ApiResponse<Object> response = new ApiResponse<>(true, "File upload successfully", fileData.getUrl());
