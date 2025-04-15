@@ -37,7 +37,7 @@ public class FileController {
         }
         FileData fileData = service.uploadFile(file);
         ApiResponse<Object> response = new ApiResponse<>(true, "File upload successfully", fileData.getUrl());
-        return ResponseEntity.status(HttpStatus.OK.value()).body(response);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
     }
 
     // this method to download all only png media types
