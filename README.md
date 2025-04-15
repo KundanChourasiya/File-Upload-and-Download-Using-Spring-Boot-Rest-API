@@ -83,7 +83,7 @@ user this data for checking purpose.
     </dependency>
 ```
 
-## configure Mysql configuration and file storage path in applcation.properties file.
+## Configure Mysql configuration and file storage path in applcation.properties file.
 ```
 spring.application.name=3.File-Upload-and-Download-Using-Spring-Boot-Rest-API
 
@@ -237,6 +237,74 @@ public class FileServiceImpl implements FileService {
 
 ```
 
+
+### *Create FileController class inside the Controller Package.* 
+
+```
+@RestController
+@RequestMapping("/file")
+@AllArgsConstructor
+public class FileController {
+
+    private FileService service;
+
+    @Autowired
+    private FileDataRepository repository;
+
+    // upload file Controller
+    @PostMapping("/upload")
+    public ResponseEntity<ApiResponse<?>> uploadFile(@RequestParam ("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()){
+            ApiResponse<Object> response = new ApiResponse<>(false, "Request must contain file", null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
+        }
+        FileData fileData = service.uploadFile(file);
+        ApiResponse<Object> response = new ApiResponse<>(true, "File upload successfully", fileData.getUrl());
+        return ResponseEntity.status(HttpStatus.OK.value()).body(response);
+    }
+
+    // this method to download all only png media types
+//    @GetMapping("/image/download/{filename}")
+//    public ResponseEntity<Object> downloadImageFile(@PathVariable String filename) throws IOException {
+//        Optional<FileData> fileData = repository.findByName(filename);
+//        String filePath = fileData.get().getUrl();
+//        byte[] file = Files.readAllBytes(new File(filePath).toPath());
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .contentType(MediaType.valueOf("image/png"))
+//                .body(file);
+//    }
+
+    // this method to download all image media types
+    @GetMapping("/image/download/{filename}")
+    public ResponseEntity<Object> downloadImageAllMediaFiles(@PathVariable String filename) throws IOException {
+        Optional<FileData> fileData = repository.findByName(filename);
+        String filePath = fileData.get().getUrl();
+        File file = new File(filePath);
+        byte[] fileBytes = Files.readAllBytes(file.toPath());
+
+        String mediaFileTypes = Files.probeContentType(file.toPath());
+        if (mediaFileTypes == null) {
+            mediaFileTypes = MediaType.APPLICATION_OCTET_STREAM_VALUE; // fallback
+        }
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.parseMediaType(mediaFileTypes))
+                .body(fileBytes);
+    }
+
+    // this method to download pdf files
+    @GetMapping("/pdf/download/{filename}")
+    public ResponseEntity<Object> downloadPdfFile(@PathVariable String filename) throws IOException {
+        Optional<FileData> fileData = repository.findByName(filename);
+        String filePath = fileData.get().getUrl();
+        byte[] file = Files.readAllBytes(new File(filePath).toPath());
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("application/pdf"))
+                .body(file);
+    }
+}
+```
+
 ##  Create ApiResponse class inside the Payload Package.
 
 ### *ApiResponse* 
@@ -307,72 +375,6 @@ public class GlobalException {
 }
 ```
 
-### *Create FileController class inside the Controller Package.* 
-
-```
-@RestController
-@RequestMapping("/file")
-@AllArgsConstructor
-public class FileController {
-
-    private FileService service;
-
-    @Autowired
-    private FileDataRepository repository;
-
-    // upload file Controller
-    @PostMapping("/upload")
-    public ResponseEntity<ApiResponse<?>> uploadFile(@RequestParam ("file") MultipartFile file) throws IOException {
-        if (file.isEmpty()){
-            ApiResponse<Object> response = new ApiResponse<>(false, "Request must contain file", null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
-        }
-        FileData fileData = service.uploadFile(file);
-        ApiResponse<Object> response = new ApiResponse<>(true, "File upload successfully", fileData.getUrl());
-        return ResponseEntity.status(HttpStatus.OK.value()).body(response);
-    }
-
-    // this method to download all only png media types
-//    @GetMapping("/image/download/{filename}")
-//    public ResponseEntity<Object> downloadImageFile(@PathVariable String filename) throws IOException {
-//        Optional<FileData> fileData = repository.findByName(filename);
-//        String filePath = fileData.get().getUrl();
-//        byte[] file = Files.readAllBytes(new File(filePath).toPath());
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .contentType(MediaType.valueOf("image/png"))
-//                .body(file);
-//    }
-
-    // this method to download all image media types
-    @GetMapping("/image/download/{filename}")
-    public ResponseEntity<Object> downloadImageAllMediaFiles(@PathVariable String filename) throws IOException {
-        Optional<FileData> fileData = repository.findByName(filename);
-        String filePath = fileData.get().getUrl();
-        File file = new File(filePath);
-        byte[] fileBytes = Files.readAllBytes(file.toPath());
-
-        String mediaFileTypes = Files.probeContentType(file.toPath());
-        if (mediaFileTypes == null) {
-            mediaFileTypes = MediaType.APPLICATION_OCTET_STREAM_VALUE; // fallback
-        }
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.parseMediaType(mediaFileTypes))
-                .body(fileBytes);
-    }
-
-    // this method to download pdf files
-    @GetMapping("/pdf/download/{filename}")
-    public ResponseEntity<Object> downloadPdfFile(@PathVariable String filename) throws IOException {
-        Optional<FileData> fileData = repository.findByName(filename);
-        String filePath = fileData.get().getUrl();
-        byte[] file = Files.readAllBytes(new File(filePath).toPath());
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("application/pdf"))
-                .body(file);
-    }
-}
-```
 
 ### Following pictures will help to understand flow of API
 
