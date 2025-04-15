@@ -43,7 +43,7 @@ https://localhost:8080/
 user this data for checking purpose.
 ```
 ## Step To Be Followed
-> 1. Create Rest Api will return to Student Details.
+> 1. Create Rest Api will return to FileData Details.
 >    
 >    **Project Documentation**
 >    - **Entity** - FileData (class)
@@ -305,7 +305,6 @@ public class GlobalException {
     }
 
 }
-
 ```
 
 ### *Create FileController class inside the Controller Package.* 
