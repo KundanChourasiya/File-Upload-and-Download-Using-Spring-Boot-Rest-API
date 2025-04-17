@@ -7,8 +7,8 @@
 > 3. Good interet connection to build project faster
 
 ## Tech Stack
-- Java
-- Spring Boot
+- Java-17
+- Spring Boot-3
 - Spring Data JPA
 - lombok
 - MySQL
