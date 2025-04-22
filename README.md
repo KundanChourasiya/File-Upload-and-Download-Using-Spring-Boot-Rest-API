@@ -22,13 +22,12 @@
 Before running the API server, you should update the database config inside the application.properties file.
 Update the port number, username and password as per your local database config and storage file path configuration.
     
-```
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/mydb;
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.username=root
 spring.datasource.password=root
-```
-```
+
 # image/pdf size and path configuration
 spring.servlet.multipart.max-file-size=10MB
 spring.servlet.multipart.max-request-size=10MB
@@ -59,7 +58,7 @@ user this data for checking purpose.
 > 5. create GlobalException class to handle all runtime exception.
 
 ## Important Dependency to be used
-```
+```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -84,7 +83,7 @@ user this data for checking purpose.
 ```
 
 ## Configure Mysql configuration and file storage path in applcation.properties file.
-```
+```properties
 spring.application.name=3.File-Upload-and-Download-Using-Spring-Boot-Rest-API
 
 # MySql Configuration
@@ -104,7 +103,7 @@ pdf.path=pdf/
 ```
 
 ## Create FileData class in Entity Package.
-```
+```java
 @Getter
 @Setter
 @Entity
@@ -132,7 +131,8 @@ public class FileData {
 
 ## Create FileDataRepository interface in repository package.
 
-```@Repository
+```java
+@Repository
 public interface FileDataRepository extends JpaRepository<FileData, Integer> {
 
     // find by name
@@ -143,7 +143,7 @@ public interface FileDataRepository extends JpaRepository<FileData, Integer> {
 ## Create FileService interface and FileServiceImpl class in Service package.
 
 ### *FileService*
-```
+```java
 public interface FileService {
 
     public FileData uploadFile(MultipartFile file) throws IOException;
@@ -151,8 +151,8 @@ public interface FileService {
 ```
 
 ### *FileServiceImpl*
-```
 
+```java
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -237,10 +237,9 @@ public class FileServiceImpl implements FileService {
 
 ```
 
-
 ### *Create FileController class inside the Controller Package.* 
 
-```
+```java
 @RestController
 @RequestMapping("/file")
 @AllArgsConstructor
@@ -308,7 +307,7 @@ public class FileController {
 ##  Create ApiResponse class inside the Payload Package.
 
 ### *ApiResponse* 
-```
+```java
 @Setter
 @Getter
 public class ApiResponse<T> {
@@ -333,7 +332,7 @@ public class ApiResponse<T> {
 
 ### *GlobalException* 
 
-```
+```java
 @RestControllerAdvice
 public class GlobalException {
 
